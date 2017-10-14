@@ -1,4 +1,4 @@
-# typed3
+# typ3
 ETHWaterloo Hackathon project
 Contributors
 -Henry Nguyen
