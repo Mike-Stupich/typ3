@@ -17,7 +17,6 @@ export class Node {
       },
       body: JSON.stringify(txObj)
     }).then(r => r.json());
-    console.log('response', response);
     const result = response.error
       ? errorHandler(response.error)
       : postprocessor(response);
