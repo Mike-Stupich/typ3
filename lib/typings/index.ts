@@ -1,1 +1,1 @@
-export { inputMappings, outputMappings } from './Schemas'
+export { IInputMappings, IOutputMappings, IMethodsAndParams } from './Schemas'

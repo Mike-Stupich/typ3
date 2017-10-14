@@ -1,9 +1,1 @@
-import { 
-    ethCall,
-    sendRawTransaction
- } from './rpcMethods' 
-
-export const rpcMethods = {
-    sendRawTransaction,
-    ethCall
-}
+export { rpcMethods } from './rpcMethods' 
