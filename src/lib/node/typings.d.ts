@@ -4,11 +4,16 @@ interface IInputMappings {
     address: String
 }
 
-interface IOutputMappings {
+interface INodeOutput {
     result: any[] | any
 }
 
 interface IMethodsAndParams {
     methods: String,
     params: String[] | String
+}
+
+interface INode {
+    sendRawTx(tx: string): Promise<string>;
+    ethCall(tx: string): Promise<string>;
 }

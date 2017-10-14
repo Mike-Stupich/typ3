@@ -4,7 +4,7 @@ const generateId = ():String => randomBytes(16).toString('hex')
 
 export const generateTxObj = (tx: IMethodsAndParams) => ({
     id: generateId(),
-    jsonrpc: 2.0,
+    jsonrpc: '2.0',
     ...tx
 })
 

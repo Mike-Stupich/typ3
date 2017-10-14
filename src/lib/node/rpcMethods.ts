@@ -1,10 +1,10 @@
 import { generateTxObj, JSONPostParser, JSONErrorHandler } from './JSONCalls'
 
-const sendRawTransaction = (tx: IInputMappings): IOutputMappings => {
+const sendRawTransaction = (tx: IInputMappings): INodeOutput => {
     
 }
 
-const ethCall = (call: IInputMappings): IOutputMappings => {
+const ethCall = (call: IInputMappings): INodeOutput => {
     
 }
 
