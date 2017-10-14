@@ -1,6 +1,9 @@
-export interface ISchema {
+export interface inputMappings {
     method: String,
     params: String[] | String,
-    id: number,
-    result: any[] | any 
+    address: String
+}
+
+export interface outputMappings {
+    result: any[] | any
 }
