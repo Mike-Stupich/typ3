@@ -11,9 +11,9 @@ const ethCall = (call: IInputMappings): IOutputMappings => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(this.decorateRequest(request))
-      }).then(r => r.json());
-
+        body: JSON.stringify(this.decorateRequest(Request))
+      })
+      .then(r => {return r.json()});
 
 }
 
