@@ -1,0 +1,29 @@
+{
+  "name": "typed3",
+  "version": "1.0.0",
+  "description": "A fully typed, lightweight alternative to web3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mike-Stupich/typed3.git"
+  },
+  "keywords": [
+    "typed3",
+    "web3",
+    "solidity",
+    "ethereum",
+    "ether"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mike-Stupich/typed3/issues"
+  },
+  "homepage": "https://github.com/Mike-Stupich/typed3#readme",
+  "dependencies": {
+    "ethereumjs-abi": "^0.6.4"
+  }
+}
