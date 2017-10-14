@@ -1,19 +1,21 @@
 import { generateTxObj, JSONPostParser, JSONErrorHandler } from './JSONCalls'
 
-const sendRawTransaction = (tx: IInputMappings): INodeOutput => {
-    
-}
+const sendRawTransaction = (tx: String): IMethodAndParams => ({
+    method: 'eth_sendRawTransaction',
+    params: tx
+})
 
-const ethCall = (call: IInputMappings): INodeOutput => {
-    
-}
+const ethCall = (call: IInputMappings): IMethodAndParams => ({
+    method: 'eth_call',
+    params: call.params
+})
 
 export const rpcMethods = {
     ethCall,
     sendRawTransaction
 }
 
-const rerouteRPCMethodsHandler = (obj) => {
+export const rerouteRPCMethodsHandler = (obj) => {
     const rerouteRPC = {
         get(node, propKey) {
             const rpcMethod = rpcMethods[propKey]
@@ -27,7 +29,7 @@ const rerouteRPCMethodsHandler = (obj) => {
             } else {
                 return (...args) => {
                     const call = rpcMethod(...args)
-                    const rpcObj = {
+                    const rpcObj: IRPCRequestObj = {
                         txObj: generateTxObj(call),
                         parser: JSONPostParser(call.parser),
                         errorHandler: JSONErrorHandler(call.errorHandler)

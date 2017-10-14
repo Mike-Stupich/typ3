@@ -1,6 +1,7 @@
 interface IInputMappings {
     endpoint: String,
-    methodAndParams: IMethodsAndParams,
+    method: String,
+    params: any | any[],
     address: String
 }
 
@@ -8,12 +9,25 @@ interface INodeOutput {
     result: any[] | any
 }
 
-interface IMethodsAndParams {
-    methods: String,
+interface IMethodAndParams {
+    method: String,
     params: String[] | String
 }
 
 interface INode {
     sendRawTx(tx: string): Promise<string>;
     ethCall(tx: string): Promise<string>;
+}
+
+interface IRequest {
+    method: String,
+    params: any | any[],
+    id: String,
+    jsonrpc: String
+}
+
+interface IRPCRequestObj {
+    txObj: IRequest,
+    parser: any,
+    errorHandler: any
 }
