@@ -16,15 +16,18 @@ const eth_sendTransaction = (tx: ITransactionObj) => ({
 });
 
 const eth_accounts = () => ({
-  method: JsonRpcMethods.eth_accounts
+  method: JsonRpcMethods.eth_accounts,
+  params: []
 });
 
 const eth_blockNumber = () => ({
-  method: JsonRpcMethods.eth_blockNumber
+  method: JsonRpcMethods.eth_blockNumber,
+  params: []
 });
 
 const eth_coinbase = () => ({
-  method: JsonRpcMethods.eth_coinbase
+  method: JsonRpcMethods.eth_coinbase,
+  params: []
 });
 
 const eth_estimateGas = (tx: IEstimateGasObj) => ({
@@ -119,6 +122,143 @@ const eth_getTransactionReceipt = (hash: string) => ({
   params: [hash]
 });
 
+const eth_getUncleByBlockHashAndIndex = (hash: string, transactionIdx: string) => ({
+  method: eth_getUncleByBlockHashAndIndex,
+  params: [hash, eth_getTransactionCount]
+});
+
+const eth_getUncleByBlockNumberAndIndex = (blockNum?: IBlockNumber, transactionIdx: string) => ({
+  method: eth_getUncleByBlockNumberAndIndex,
+  params: [blockNum, transactionIdx]
+});
+
+const eth_getCompilers = () => ({
+  method: eth_getCompilers,
+  params: []
+});
+
+const eth_compileSolidity = (source: string) => ({
+  method: eth_compileSolidity,
+  params: [source]
+});
+
+const eth_compileLLL = (source: string) => ({
+  method: eth_compileLLL,
+  params: [source]
+});
+
+const eth_compileSerpent = (source: string) => ({
+  method: eth_compileSerpent,
+  params: [source]
+});
+
+const eth_newFilter = (filterObj: IFilterOptions) => ({
+  method: eth_newFilter,
+  params: [filterObj]
+});
+
+const eth_newBlockFilter = () => ({
+  method: eth_newBlockFilter,
+  params: []
+});
+
+const eth_newPendingTransactionFilter = () => ({
+  method: eth_newPendingTransactionFilter,
+  params: []
+});
+
+const eth_uninstallFilter = (filterId: string) => ({
+  method: eth_uninstallFilter,
+  params: [filterId]
+});
+
+const eth_getWork = () => ({
+  method: eth_getWork,
+  params: []
+});
+
+const eth_submitWork = (hashNonceFound: string, hashHeadersPow: string, hashMixDigest: string) => ({
+  method: eth_submitWork,
+  params: [hashNonceFound,hashHeadersPow,hashMixDigest]
+});
+
+const eth_submitHashrate = (hashRate: string, id: string) => ({
+  method: eth_submitHashrate,
+  params: [hashRate, id]
+});
+
+const db_putString = (dbName: string, keyName: string, store: string) => ({
+  method: db_putString,
+  params: [dbName, keyName, store]
+});
+
+const db_getString = (dbName: string, keyName: string) => ({
+  method: db_getString,
+  params: [dbName, keyName]
+});
+
+const db_putHex = (dbName: string, keyName: string, storeData: string) => ({
+  method: db_putHex,
+  params: [dbName, keyName, storeData]
+});
+
+const db_getHex = (dbName: string, keyName: string) => ({
+  method: db_getHex,
+  params: [dbName, keyName]
+});
+
+const shh_version = () => ({
+  method: shh_version,
+  params: []
+});
+
+//Not sure: need new Object
+// const shh_post = (whipserObj: string) => ({
+//   method: shh_post,
+//   params: [whipserObj]
+// });
+
+const shh_newIdentity = () => ({
+  method: shh_newIdentity,
+  params: []
+});
+
+const shh_hasIdentity = (address: string) => ({
+  method: shh_hasIdentity,
+  params: [address]
+});
+
+const shh_newGroup = () => ({
+  method: shh_newGroup,
+  params: []
+});
+
+const shh_addToGroup = (address: string) => ({
+  method: shh_addToGroup,
+  params: [address]
+});
+
+//Not sure need to define new filter options
+//const shh_newFilter = (filterObj: IFilterOptions) => ({
+//  method: shh_newFilter,
+//  params: [filterObj]
+//});
+
+const shh_uninstallFilter = (filterId: string) => ({
+  method: shh_uninstallFilter,
+  params: [filterId]
+});
+
+const shh_getFilterChanges = (filterId: string) => ({
+  method: shh_getFilterChanges,
+  params: [filterId]
+});
+
+const shh_getMessages = (filterId: string) => ({
+  method: shh_getMessages,
+  params: [filterId]
+});
+
 const rpcMethods = {
   eth_call,
   eth_sendRawTransaction,
@@ -142,7 +282,32 @@ const rpcMethods = {
   eth_getTransactionByBlockNumberAndIndex,
   eth_getTransactionByHash,
   eth_getTransactionCount,
-  eth_getTransactionReceipt
+  eth_getTransactionReceipt,
+  eth_getUncleByBlockHashAndIndex,
+  eth_getUncleByBlockNumberAndIndex,
+  eth_getCompilers,
+  eth_compileSolidity,
+  eth_compileLLL,
+  eth_compileSerpent,
+  eth_newFilter,
+  eth_newBlockFilter,
+  eth_newPendingTransactionFilter,
+  eth_uninstallFilter,
+  eth_getWork,
+  eth_submitWork,
+  eth_submitHashrate,
+  db_putString,
+  db_getString,
+  db_putHex,
+  db_getHex,
+  shh_version,
+  shh_newIdentity,
+  shh_hasIdentity,
+  shh_newGroup,
+  shh_addToGroup,
+  shh_uninstallFilter,
+  shh_getFilterChanges,
+  shh_getMessages
 };
 
 export const rerouteRPCMethodsHandler = obj => {

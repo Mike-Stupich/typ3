@@ -68,6 +68,31 @@ interface IProxiedRpcMethods {
     blockNum?: IBlockNumber
   ) => Promise<any>;
   eth_getTransactionReceipt: (hash: string) => Promise<any>;
+  eth_getUncleByBlockHashAndIndex: (hash: string, transactionIdx: string) => Promise<any>;
+  eth_getUncleByBlockNumberAndIndex: (blockNum: IBlockNumber, transactionIdx: string) => Promise<any>;
+  eth_getCompilers: () => Promise<any>;
+  eth_compileSolidity: (source: string) => Promise<any>;
+  eth_compileLLL: (source: string) => Promise<any>;
+  eth_compileSerpent: (source: string) => Promise<any>;
+  eth_newFilter: (filterObj: IFilterOptions) => Promise<any>;
+  eth_newBlockFilter: () => Promise<any>;
+  eth_newPendingTransactionFilter: ()  => Promise<any>;
+  eth_uninstallFilter: (filterId: string) => Promise<any>;
+  eth_getWork: () => Promise<any>;
+  eth_submitWork: (hashNonceFound: string, hashHeadersPow: string, hashMixDigest: string) => Promise<any>;
+  eth_submitHashrate: (hashRate: string, id: string) => Promise<any>;
+  db_putString: (dbName: string, keyName: string, store: string) => Promise<any>;
+  db_getString: (dbName: string, keyName: string)  => Promise<any>;
+  db_putHex: (dbName: string, keyName: string, storeData: string) => Promise<any>;
+  db_getHex: (dbName: string, keyName: string) => Promise<any>;
+  shh_version: () => Promise<any>;
+  shh_hasIdentity: (address: string) => Promise<any>;
+  shh_newGroup: () => Promise<any>;
+  shh_addToGroup: (address: string) => Promise<any>;
+  shh_uninstallFilter: (filterId: string) => Promise<any>;
+  shh_getFilterChanges: (filterId: string) => Promise<any>;
+  shh_getMessages: (filterId: string) => Promise<any>;
+
 }
 type ITopic = string | null | (string | null)[];
 
