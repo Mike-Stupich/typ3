@@ -6,22 +6,28 @@ export const parseSuppliedArgs = (
   func: IAugmentedAbiFunction
 ) => {
   const { derived: { inputNames }, argHandlers } = func;
-  return inputNames.map(name => {
+  const errArr: string[] = [];
+  const parsedResult = inputNames.map(name => {
     const { type } = argHandlers[name];
     //TODO: parse args based on type
     if (!userSuppliedArgs[name]) {
-      throw Error(
-        `Expected argument "${name}" of type "${type}" missing, suppliedArgs: ${JSON.stringify(
-          userSuppliedArgs,
-          null,
-          2
-        )}`
-      );
+      errArr.push(`Expected argument "${name}" of type "${type}" missing`);
     }
+
     const argValue = userSuppliedArgs[name];
 
     return argHandlers[name].processInput(argValue).value;
   });
+  if (errArr.length > 0) {
+    const errStr = errArr.join('\n');
+    throw Error(`
+
+${errStr}
+Supplied Arguments: ${JSON.stringify(userSuppliedArgs, null, 2)} 
+`);
+  } else {
+    return parsedResult;
+  }
 };
 
 export const parsePostDecodedValue = (type: string, value: any): string => {

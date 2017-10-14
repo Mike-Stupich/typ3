@@ -7,6 +7,8 @@ async function init() {
   const infura = 'https://mainnet.infura.io/kC4pdeo022QLvBPpwskg';
   const local = 'http://localhost:8545';
   const node = ProxiedNode(local);
-  const connectedErc20 = ConnectedContract(erc20, node);
+  const connectedErc20 = ConnectedContract(erc20, node, {
+    to: '0x0abdace70d3790235af448c88547603b945604ea'
+  });
 }
 init();
