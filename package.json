@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/Mike-Stupich/typed3#readme",
   "dependencies": {
+    "bn.js": "^4.11.8",
     "ethereumjs-abi": "^0.6.4"
   }
 }
