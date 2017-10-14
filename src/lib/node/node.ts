@@ -1,36 +1,16 @@
 export class Node {
-  private currentNodeConfig;
-  private currentNetworkConfig;
-  private nodeConfigs;
-  private networkConfigs;
+  private endpoint: string;
 
-  constructor(configs) {
-    Object.assign(this, ...configs);
+  constructor(endpoint: string) {
+    this.endpoint = endpoint;
   }
 
-  setNodeConfig = key => {
-    if (this.nodeConfigs[key]) {
-      this.currentNodeConfig = this.nodeConfigs[key];
-    } else {
-      throw Error(`${key} is not a valid node config`);
-    }
-  };
-
-  setNetworkConfig = key => {
-    if (this.networkConfigs[key]) {
-      this.currentNetworkConfig[key] = this.networkConfigs[key];
-    } else {
-      throw Error(`${key} is not a valid network config`);
-    }
-  };
-
-  getNodeConfig = () => this.currentNodeConfig;
-  getNetworkConfig = () => this.currentNetworkConfig;
+  setEndpoint = (endpoint: string) => (this.endpoint = endpoint);
 
   sendRPCRequest = async (request: IRPCRequestObj) => {
     const { txObj, postprocessor, errorHandler } = request;
     2;
-    const response = await fetch(this.currentNodeConfig.endpoint, {
+    const response = await fetch(this.endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -1,14 +1,6 @@
 import { FunctionFactory } from '../function';
 import { objReduce } from '../function/utils';
-enum AbiMethodTypes {
-  function = 'function',
-  event = 'event',
-  constructor = 'constructor'
-}
 
-interface IOutputMappings {
-  [abiFuncName: string]: string[];
-}
 export const CreateContract = (
   abi: IAbiFunction[],
   outputMappings: IOutputMappings = {}
