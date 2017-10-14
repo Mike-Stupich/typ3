@@ -4,6 +4,37 @@ interface IInputMappings {
   params: any | any[];
   address: String;
 }
+type IProxiedNode = Node & IProxiedRpcMethods;
+
+interface ICallTxObj {
+  from?: string;
+  to: string;
+  gas?: string;
+  gasPrice?: string;
+  value?: string;
+  data?: string;
+}
+interface ITransactionObj {
+  from: string;
+  to: string;
+  gas?: string;
+  gasPrice?: string;
+  value?: string;
+  data: string;
+  nonce?: string;
+}
+
+interface IJsonSchema<T> {
+  data: T;
+  errorHandler?: any;
+  preProcessor?: any;
+  postProcessor?: any;
+}
+interface IProxiedRpcMethods {
+  sendRawTransaction: (tx: string) => Promise<any>;
+  ethCall: (tx: ICallTxObj) => Promise<any>;
+  sendTransaction: (tx: ITransactionObj) => Promise<any>;
+}
 
 interface INodeOutput {
   result: any[] | any;

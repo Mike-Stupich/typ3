@@ -1,4 +1,7 @@
 import { Node } from './node';
 import { rerouteRPCMethodsHandler } from './rpcMethods';
 
-export const nodeHandler = rerouteRPCMethodsHandler(node);
+export const ProxiedNode = (endpoint: string): IProxiedNode => {
+  const node = new Node(endpoint);
+  return rerouteRPCMethodsHandler(node);
+};

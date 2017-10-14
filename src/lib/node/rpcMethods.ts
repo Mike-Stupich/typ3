@@ -1,27 +1,11 @@
 import { generateTxObj, JSONPostParser, JSONErrorHandler } from './JSONUtils';
 
-interface ITransactionObj {
-  from: string;
-  to: string;
-  gas?: string;
-  gasPrice?: string;
-  value?: string;
-  data: string;
-  nonce?: string;
-}
-interface IJsonSchema<T> {
-  data: T;
-  errorHandler?;
-  preProcessor?;
-  postProcessor?;
-}
-
 const sendRawTransaction = (tx: String) => ({
   method: JsonRpcMethods.eth_sendRawTransaction,
   params: [tx, 'pending']
 });
 
-const ethCall = (call: ITransactionObj) => ({
+const ethCall = (call: ICallTxObj) => ({
   method: JsonRpcMethods.eth_call,
   params: [call, 'pending']
 });
@@ -31,7 +15,7 @@ const sendTransaction = (tx: ITransactionObj) => ({
   params: [tx, 'pending']
 });
 
-const rpcMethods = {
+export const rpcMethods = {
   ethCall,
   sendRawTransaction,
   sendTransaction

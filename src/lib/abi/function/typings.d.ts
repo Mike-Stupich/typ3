@@ -1,5 +1,12 @@
 type IO = { name: string; type: string };
 
+interface IFunctionFactory {
+  constant: boolean;
+  decodeArguments: (args) => IDecode;
+  decodeReturnValue: (ret) => IDecode;
+  encodeArguments: (args) => string;
+}
+
 interface IAbiFunction {
   name: string;
   inputs: IO[];

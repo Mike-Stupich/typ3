@@ -6,7 +6,7 @@ import { decodeArguments, decodeReturnValue, encodeArguments } from './coders';
 export const FunctionFactory = (
   abiFunc: IAbiFunction,
   outputMappings: IFuncOutputMappings = []
-) => {
+): IFunctionFactory => {
   const { inputs, outputs, name } = abiFunc;
   const argHandlers = makeArgHandlers(inputs);
   const inputTypes = inputs.map(({ type }) => type);
@@ -30,6 +30,7 @@ export const FunctionFactory = (
   };
 
   return {
+    constant: augmentedFunc.abi.constant,
     decodeArguments: args => decodeArguments(args, augmentedFunc),
     decodeReturnValue: ret => decodeReturnValue(ret, augmentedFunc),
     encodeArguments: args => encodeArguments(args, augmentedFunc)
