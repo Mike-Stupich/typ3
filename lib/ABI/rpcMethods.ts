@@ -6,7 +6,15 @@ const sendRawTransaction = (tx: IInputMappings): IOutputMappings => {
 }
 
 const ethCall = (call: IInputMappings): IOutputMappings => {
-    
+    let req = fetch(<RequestInfo> call.endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.decorateRequest(request))
+      }).then(r => r.json());
+
+
 }
 
 export const rpcMethods = {
