@@ -1,11 +1,13 @@
-import { IInputMappings, IOutputMappings } from '../typings'
 import { generateTxObj, JSONPostParser, JSONErrorHandler } from './JSONCalls'
 
-const sendRawTransaction = (tx: IInputMappings): IOutputMappings => {
-    
-}
+const sendRawTransaction = (tx: String): IMethodAndParams => ({
+    method: 'eth_sendRawTransaction',
+    params: tx
+})
 
 const ethCall = (call: IInputMappings): IOutputMappings => {
+    method: 'eth_call',
+    params: call.params
     let req = fetch(<RequestInfo> call.endpoint, {
         method: 'POST',
         headers: {
@@ -22,7 +24,7 @@ export const rpcMethods = {
     sendRawTransaction
 }
 
-const rerouteRPCMethodsHandler = (obj) => {
+export const rerouteRPCMethodsHandler = (obj) => {
     const rerouteRPC = {
         get(node, propKey) {
             const rpcMethod = rpcMethods[propKey]
@@ -36,7 +38,7 @@ const rerouteRPCMethodsHandler = (obj) => {
             } else {
                 return (...args) => {
                     const call = rpcMethod(...args)
-                    const rpcObj = {
+                    const rpcObj: IRPCRequestObj = {
                         txObj: generateTxObj(call),
                         parser: JSONPostParser(call.parser),
                         errorHandler: JSONErrorHandler(call.errorHandler)
