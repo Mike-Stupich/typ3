@@ -1,5 +1,7 @@
 import { CreateContract } from './abi';
-import { ProxiedNode } from './node';
+import { ProxiedNode, IProxiedNode } from './node';
+
+export { ProxiedNode, CreateContract, ConnectedContract };
 
 const handleCall = async (args: IHandleCallParams) => {
   const { userArgs, func, node, txObj } = args;
@@ -21,7 +23,7 @@ const ConnectedContract = (contract, node: IProxiedNode) => {
   const routeCalls = {
     get(contract, propKey) {
       const contractMethod = contract[propKey];
-      const isConstant = contract.constant;
+      const isConstant = contractMethod.constant;
       if (!contractMethod) {
         throw Error(`${propKey} is not a valid contract method`);
       }
@@ -33,4 +35,5 @@ const ConnectedContract = (contract, node: IProxiedNode) => {
       return returnFunc;
     }
   };
+  return new Proxy(contract, routeCalls);
 };

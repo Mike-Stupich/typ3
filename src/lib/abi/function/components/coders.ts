@@ -1,5 +1,4 @@
 import * as abi from 'ethereumjs-abi';
-import BN from 'bn.js';
 import {
   parsePostDecodedValue,
   parsePreEncodedValue,
@@ -63,11 +62,7 @@ export const decodeReturnValue = (
   str: string,
   func: IAugmentedAbiFunction
 ): IDecode => {
-  const {
-    methodSelector,
-    derived: { outputNames, outputTypes },
-    abi: { outputs }
-  } = func;
+  const { methodSelector, derived: { outputNames, outputTypes } } = func;
 
   const cleanStr = str.replace(`0x${methodSelector}`, '').replace('0x', '');
 
@@ -76,7 +71,9 @@ export const decodeReturnValue = (
   const retArr = abi.rawDecode(outputTypes, retBuffer);
 
   const reducer = (argObj, currRet, index) => {
-    const { name, type } = outputs[index];
+    const name = outputNames[index];
+    const type = outputTypes[index];
+
     return {
       ...argObj,
       [name]: parsePostDecodedValue(type, currRet)

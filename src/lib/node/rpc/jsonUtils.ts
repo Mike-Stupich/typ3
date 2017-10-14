@@ -8,9 +8,8 @@ export const generateTxObj = tx => ({
   ...tx
 });
 
-export const JSONPostParser = (parser: any = null) => ({ result }) => {
+export const JSONPostParser = (parser: any = null) => ({ result }) =>
   parser && typeof parser === 'function' ? parser(result) : result;
-};
 
 export const JSONErrorHandler = (handler: any = null) => e => {
   if (handler && typeof handler === 'function') {

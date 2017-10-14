@@ -1,5 +1,11 @@
 import { FunctionFactory } from '../function';
-import { objReduce } from '../function/utils';
+import { objReduce } from '../function/components/utils';
+
+enum AbiMethodTypes {
+  function = 'function',
+  event = 'event',
+  constructor = 'constructor'
+}
 
 export const CreateContract = (
   abi: IAbiFunction[],

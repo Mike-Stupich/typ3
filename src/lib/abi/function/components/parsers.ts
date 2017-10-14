@@ -20,7 +20,7 @@ export const parseSuppliedArgs = (
     }
     const argValue = userSuppliedArgs[name];
 
-    return argHandlers[name].processInput(argValue);
+    return argHandlers[name].processInput(argValue).value;
   });
 };
 

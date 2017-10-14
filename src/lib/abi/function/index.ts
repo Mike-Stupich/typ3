@@ -1,7 +1,10 @@
 import * as abi from 'ethereumjs-abi';
-import { makeArgHandlers } from './coders';
-
-import { decodeArguments, decodeReturnValue, encodeArguments } from './coders';
+import {
+  makeArgHandlers,
+  decodeArguments,
+  decodeReturnValue,
+  encodeArguments
+} from './components/coders';
 
 export const FunctionFactory = (
   abiFunc: IAbiFunction,

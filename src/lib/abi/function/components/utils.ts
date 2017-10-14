@@ -1,4 +1,4 @@
-import BN from 'bn.js';
+import * as BN from 'bn.js';
 
 export const isBigNumber = (object: object) =>
   object instanceof BN ||

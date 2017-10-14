@@ -26,9 +26,11 @@
   "dependencies": {
     "bn.js": "^4.11.8",
     "ethereumjs-abi": "^0.6.4",
-    "fetch": "^1.1.0"
+    "fetch": "^1.1.0",
+    "node-fetch": "^1.7.3"
   },
   "devDependencies": {
-    "@types/node": "^8.0.34"
+    "@types/node": "^8.0.34",
+    "@types/node-fetch": "^1.6.7"
   }
 }

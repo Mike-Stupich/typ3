@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 export class Node {
   private endpoint: string;
 
@@ -9,7 +10,6 @@ export class Node {
 
   sendRPCRequest = async (request: IRPCRequestObj) => {
     const { txObj, postprocessor, errorHandler } = request;
-    2;
     const response = await fetch(this.endpoint, {
       method: 'POST',
       headers: {
@@ -17,7 +17,7 @@ export class Node {
       },
       body: JSON.stringify(txObj)
     }).then(r => r.json());
-
+    console.log('response', response);
     const result = response.error
       ? errorHandler(response.error)
       : postprocessor(response);
