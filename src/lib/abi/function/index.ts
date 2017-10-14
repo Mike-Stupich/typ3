@@ -1,13 +1,13 @@
-import abi from 'ethereumjs-abi';
+import * as abi from 'ethereumjs-abi';
 import { makeArgHandlers } from './coders';
 
-export { decodeArguments, decodeReturnValue, encodeArguments } from './coders';
+import { decodeArguments, decodeReturnValue, encodeArguments } from './coders';
 
-export const Factory = (
+export const FunctionFactory = (
   abiFunc: IAbiFunction,
-  outputMappings: IOutputMappings
-): IAugmentedAbiFunction => {
-  const { inputs, outputs } = abiFunc;
+  outputMappings: IFuncOutputMappings = []
+) => {
+  const { inputs, outputs, name } = abiFunc;
   const argHandlers = makeArgHandlers(inputs);
   const inputTypes = inputs.map(({ type }) => type);
   const outputTypes = outputs.map(({ type }) => type);
@@ -17,7 +17,7 @@ export const Factory = (
   );
   const methodSelector = abi.methodID(name, inputTypes).toString('hex');
 
-  return {
+  const augmentedFunc: IAugmentedAbiFunction = {
     abi: abiFunc,
     argHandlers,
     derived: {
@@ -27,5 +27,11 @@ export const Factory = (
       outputTypes
     },
     methodSelector
+  };
+
+  return {
+    decodeArguments: args => decodeArguments(args, augmentedFunc),
+    decodeReturnValue: ret => decodeReturnValue(ret, augmentedFunc),
+    encodeArguments: args => encodeArguments(args, augmentedFunc)
   };
 };

@@ -3,7 +3,6 @@
     "outDir": "./dist/",
     "sourceMap": true,
     "strictNullChecks": true,
-    "target": "es2015",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",

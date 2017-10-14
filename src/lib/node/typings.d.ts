@@ -1,33 +1,33 @@
 interface IInputMappings {
-    endpoint: String,
-    method: String,
-    params: any | any[],
-    address: String
+  endpoint: String;
+  method: String;
+  params: any | any[];
+  address: String;
 }
 
 interface INodeOutput {
-    result: any[] | any
+  result: any[] | any;
 }
 
 interface IMethodAndParams {
-    method: String,
-    params: String[] | String
+  method: String;
+  params: String[] | String;
 }
 
 interface INode {
-    sendRawTx(tx: string): Promise<string>;
-    ethCall(tx: string): Promise<string>;
+  sendRawTx(tx: string): Promise<string>;
+  ethCall(tx: string): Promise<string>;
 }
 
 interface IRequest {
-    method: String,
-    params: any | any[],
-    id: String,
-    jsonrpc: String
+  method: String;
+  params: any | any[];
+  id: String;
+  jsonrpc: String;
 }
 
 interface IRPCRequestObj {
-    txObj: IRequest,
-    parser: any,
-    errorHandler: any
+  txObj: IRequest;
+  postprocessor: any;
+  errorHandler: any;
 }

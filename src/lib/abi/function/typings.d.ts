@@ -21,7 +21,7 @@ interface IAugmentedAbiFunction {
   argHandlers: IFuncArgs;
 }
 
-type IOutputMappings = string[];
+type IFuncOutputMappings = string[];
 
 type IProcessInput = (inputToParse) => any;
 

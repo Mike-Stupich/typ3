@@ -1,13 +1,14 @@
-import abi from 'ethereumjs-abi';
+import * as abi from 'ethereumjs-abi';
 import BN from 'bn.js';
 import {
   parsePostDecodedValue,
   parsePreEncodedValue,
   parseSuppliedArgs
 } from './parsers';
+import { objReduce } from './utils';
 
-export const makeArgHandlers = (inputs: IAbiFunction['inputs']): IFuncArgs =>
-  inputs.reduce((accumulator, currInput) => {
+export const makeArgHandlers = (inputs: IAbiFunction['inputs']): IFuncArgs => {
+  const reducer = (accumulator, currInput) => {
     const { name, type } = currInput;
     const processInput = inputToParse => ({
       value: parsePreEncodedValue(type, inputToParse)
@@ -17,7 +18,10 @@ export const makeArgHandlers = (inputs: IAbiFunction['inputs']): IFuncArgs =>
       ...accumulator,
       [name]: paramaterHandler
     };
-  }, {});
+  };
+
+  return objReduce(inputs, reducer);
+};
 
 export const encodeArguments = (
   suppliedInputs: IArgs = {},
@@ -43,18 +47,20 @@ export const decodeArguments = (
   // Decode!
   const argArr = abi.rawDecode(inputTypes, argBuffer);
   //TODO: parse checksummed addresses
-  return argArr.reduce((argObj, currArg, index) => {
+  const reducer = (argObj, currArg, index) => {
     const currName = inputNames[index];
     const currType = inputTypes[index];
     return {
       ...argObj,
       [currName]: parsePostDecodedValue(currType, currArg)
     };
-  }, {});
+  };
+
+  return objReduce(argArr, reducer);
 };
 
 export const decodeReturnValue = (
-  argString: string,
+  str: string,
   func: IAugmentedAbiFunction
 ): IDecode => {
   const {
@@ -63,20 +69,19 @@ export const decodeReturnValue = (
     abi: { outputs }
   } = func;
 
-  const cleanedArgString = argString
-    .replace(`0x${methodSelector}`, '')
-    .replace('0x', '');
+  const cleanStr = str.replace(`0x${methodSelector}`, '').replace('0x', '');
 
-  const argBuffer = new Buffer(cleanedArgString, 'hex');
+  const retBuffer = new Buffer(cleanStr, 'hex');
 
-  const argArr = abi.rawDecode(outputTypes, argBuffer);
+  const retArr = abi.rawDecode(outputTypes, retBuffer);
 
-  //TODO: parse checksummed addresses
-  return argArr.reduce((argObj, currArg, index) => {
+  const reducer = (argObj, currRet, index) => {
     const { name, type } = outputs[index];
     return {
       ...argObj,
-      [name]: parsePostDecodedValue(type, currArg)
+      [name]: parsePostDecodedValue(type, currRet)
     };
-  }, {});
+  };
+  //TODO: parse checksummed addresses
+  return objReduce(retArr, reducer);
 };
