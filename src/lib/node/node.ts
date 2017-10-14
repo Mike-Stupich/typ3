@@ -30,7 +30,19 @@ export class Node {
     getNetworkConfig = () => this.currentNetworkConfig
 
     sendRPCRequest = async (request: IRPCRequestObj) => {
+        const { txObj, parser, errorHandler } = requestObj;
+        const response = await fetch(this.currentNodeConfig.endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(txObj)
+        }).then(r => r.json());
         
+        const result = response.error
+          ? errorHandler(response.error)
+          : parser(response);
+        return result;
     }
 }
 
