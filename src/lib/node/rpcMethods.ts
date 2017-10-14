@@ -5,19 +5,10 @@ const sendRawTransaction = (tx: String): IMethodAndParams => ({
     params: tx
 })
 
-const ethCall = (call: IInputMappings): IOutputMappings => {
+const ethCall = (call: String): IMethodAndParams => ({
     method: 'eth_call',
-    params: call.params
-    let req = fetch(<RequestInfo> call.endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.decorateRequest(Request))
-      })
-      .then(r => {return r.json()});
-
-}
+    params: [call, 'pending']
+})
 
 export const rpcMethods = {
     ethCall,

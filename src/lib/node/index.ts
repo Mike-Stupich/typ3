@@ -4,6 +4,6 @@ import { rerouteRPCMethodsHandler } from './rpcMethods'
 
 const networkConfigs = require('../config/networkConfig.json')
 const nodeConfigs = require('../config/nodeConfig.json')
-const node = new Node({nodeConfigs, networkConfigs })
+const node = new Node({ nodeConfigs, networkConfigs })
 
-export default rerouteRPCMethodsHandler(node)
+export const nodeHandler =  rerouteRPCMethodsHandler(node)

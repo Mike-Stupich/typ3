@@ -2,7 +2,7 @@ import { randomBytes } from 'crypto'
 
 const generateId = ():String => randomBytes(16).toString('hex') 
 
-export const generateTxObj = (tx: IMethodAndParams) => ({
+export const generateTxObj = (tx: IMethodAndParams): IRequest => ({
     id: generateId(),
     jsonrpc: '2.0',
     ...tx
