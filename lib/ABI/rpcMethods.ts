@@ -1,4 +1,3 @@
-import { IInputMappings, IOutputMappings } from '../typings'
 import { generateTxObj, JSONPostParser, JSONErrorHandler } from './JSONCalls'
 
 const sendRawTransaction = (tx: IInputMappings): IOutputMappings => {

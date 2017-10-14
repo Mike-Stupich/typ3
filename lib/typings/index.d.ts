@@ -1,14 +1,14 @@
-export interface IInputMappings {
+interface IInputMappings {
     endpoint: String,
     methodAndParams: IMethodsAndParams,
     address: String
 }
 
-export interface IOutputMappings {
+interface IOutputMappings {
     result: any[] | any
 }
 
-export interface IMethodsAndParams {
+interface IMethodsAndParams {
     methods: String,
     params: String[] | String
 }

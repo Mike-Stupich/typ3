@@ -1,4 +1,3 @@
-import { IMethodsAndParams } from '../typings'
 import { randomBytes } from 'crypto'
 
 const generateId = ():String => randomBytes(16).toString('hex') 
