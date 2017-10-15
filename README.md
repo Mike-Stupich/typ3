@@ -1,11 +1,6 @@
 # typ3 -- A typescript, promise-only alternative to web3
-ConnectedContract,
-CreateContract,
-ProxiedNode as Node
 
-ETHWaterloo Hackathon project
-
-API:
+ABI Type Generator Package -- https://github.com/Mike-Stupich/typ3-cli
 
 ##  Node(endpoint) 
 
