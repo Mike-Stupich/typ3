@@ -2,6 +2,7 @@ type IO = { name: string; type: string };
 
 interface IFunctionFactory {
   constant: boolean;
+  paramless: boolean;
   decodeArguments: (args) => IDecode;
   decodeReturnValue: (ret) => IDecode;
   encodeArguments: (args) => string;

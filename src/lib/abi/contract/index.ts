@@ -7,7 +7,7 @@ enum AbiMethodTypes {
   constructor = 'constructor'
 }
 
-export const CreateContract = (
+export const CreateContract = <T>(
   abi: IAbiFunction[],
   outputMappings: IOutputMappings = {}
 ) => {
@@ -22,7 +22,7 @@ export const CreateContract = (
       : c;
   };
   const contract = objReduce(abi, reducer);
-  return contract;
+  return contract as T;
 };
 
 const selector = {

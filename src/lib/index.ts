@@ -33,25 +33,29 @@ const handleSend = async (args: IHandleSendParams) => {
   return parsedResponse;
 };
 
-const ConnectedContract = (
+const ConnectedContract = <T>(
   contract,
   node: IProxiedNode,
   defaultTxObj: Partial<ITransactionObj> = {}
 ) => {
   const routeCalls = {
     get(contract, propKey) {
-      const contractMethod = contract[propKey];
+      const contractMethod: IFunctionFactory = contract[propKey];
       const isConstant = contractMethod.constant;
+      const isParamless = contractMethod.paramless;
       if (!contractMethod) {
         throw Error(`${propKey} is not a valid contract method`);
       }
+
       const returnFunc = (userArgs, txObj) => {
-        const mergedTxObj = { ...defaultTxObj, ...txObj };
+        const mergedTxObj = isParamless
+          ? { ...defaultTxObj, ...userArgs }
+          : { ...defaultTxObj, ...txObj };
         const methodArgs = {
           func: contractMethod,
           node,
           txObj: mergedTxObj,
-          userArgs
+          userArgs: isParamless ? null : userArgs
         };
         return isConstant ? handleCall(methodArgs) : handleSend(methodArgs);
       };
@@ -59,5 +63,5 @@ const ConnectedContract = (
       return returnFunc;
     }
   };
-  return new Proxy(contract, routeCalls);
+  return new Proxy(contract, routeCalls) as T;
 };

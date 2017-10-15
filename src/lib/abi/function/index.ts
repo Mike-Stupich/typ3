@@ -34,6 +34,7 @@ export const FunctionFactory = (
 
   return {
     constant: augmentedFunc.abi.constant,
+    paramless: augmentedFunc.abi.inputs.length === 0,
     decodeArguments: args => decodeArguments(args, augmentedFunc),
     decodeReturnValue: ret => decodeReturnValue(ret, augmentedFunc),
     encodeArguments: args => encodeArguments(args, augmentedFunc)
