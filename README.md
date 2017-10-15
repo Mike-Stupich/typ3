@@ -1,6 +1,12 @@
 # typ3 -- A typescript, promise-only alternative to web3
 
 ABI Type Generator Package -- https://github.com/Mike-Stupich/typ3-cli
+ 
+- Uses typed-objects in parameters instead of arrays to call contracts for position-agnostic calls 
+- Uses typed-objects in outputs, eliminating the need to guess what values they are 
+- Automatically chooses between a transaction and call on invokcation via proxies
+- Currently only supports ABI functions 
+- Fully typed contracts and rpc-calls
 
 ##  Node(endpoint) 
 
