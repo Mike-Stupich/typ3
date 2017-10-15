@@ -14,7 +14,6 @@ const setEndpoint = (endpoint: string, node: INode) =>
 
 const sendRpcRequest = async (request: IRPCRequestObj, node: INode) => {
   const { txObj, postprocessor, errorHandler } = request;
-  console.log(txObj);
   const response = await fetch(node.endpoint, {
     method: 'POST',
     headers: {
