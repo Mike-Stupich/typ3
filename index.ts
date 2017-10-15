@@ -29,6 +29,7 @@ async function init() {
   console.log(txHash);
   let k = await node.eth_getTransactionReceipt(txHash);
   let m = await node.eth_getBlockByHash(k.blockHash, true);
+  let a = await node.eth_getTransactionByHash(txHash);
   console.log(k);
   console.log('\n\n\n');
   console.log(m);
