@@ -1,3 +1,13 @@
+interface INode {
+  endpoint: string;
+}
+
+interface IAugmentedNode {
+  node: INode;
+  sendRpcRequest: (request: IRPCRequestObj) => Promise<any>;
+  setEndpoint: (endpoint: string) => void;
+}
+
 interface IInputMappings {
   endpoint: String;
   method: String;
@@ -20,7 +30,7 @@ interface ITransactionObj {
   gas?: string;
   gasPrice?: string;
   value?: string;
-  data: string;
+  data?: string;
   nonce?: string;
 }
 
@@ -68,22 +78,40 @@ interface IProxiedRpcMethods {
     blockNum?: IBlockNumber
   ) => Promise<any>;
   eth_getTransactionReceipt: (hash: string) => Promise<any>;
-  eth_getUncleByBlockHashAndIndex: (hash: string, transactionIdx: string) => Promise<any>;
-  eth_getUncleByBlockNumberAndIndex: (blockNum: IBlockNumber, transactionIdx: string) => Promise<any>;
+  eth_getUncleByBlockHashAndIndex: (
+    hash: string,
+    transactionIdx: string
+  ) => Promise<any>;
+  eth_getUncleByBlockNumberAndIndex: (
+    blockNum: IBlockNumber,
+    transactionIdx: string
+  ) => Promise<any>;
   eth_getCompilers: () => Promise<any>;
   eth_compileSolidity: (source: string) => Promise<any>;
   eth_compileLLL: (source: string) => Promise<any>;
   eth_compileSerpent: (source: string) => Promise<any>;
   eth_newFilter: (filterObj: IFilterOptions) => Promise<any>;
   eth_newBlockFilter: () => Promise<any>;
-  eth_newPendingTransactionFilter: ()  => Promise<any>;
+  eth_newPendingTransactionFilter: () => Promise<any>;
   eth_uninstallFilter: (filterId: string) => Promise<any>;
   eth_getWork: () => Promise<any>;
-  eth_submitWork: (hashNonceFound: string, hashHeadersPow: string, hashMixDigest: string) => Promise<any>;
+  eth_submitWork: (
+    hashNonceFound: string,
+    hashHeadersPow: string,
+    hashMixDigest: string
+  ) => Promise<any>;
   eth_submitHashrate: (hashRate: string, id: string) => Promise<any>;
-  db_putString: (dbName: string, keyName: string, store: string) => Promise<any>;
-  db_getString: (dbName: string, keyName: string)  => Promise<any>;
-  db_putHex: (dbName: string, keyName: string, storeData: string) => Promise<any>;
+  db_putString: (
+    dbName: string,
+    keyName: string,
+    store: string
+  ) => Promise<any>;
+  db_getString: (dbName: string, keyName: string) => Promise<any>;
+  db_putHex: (
+    dbName: string,
+    keyName: string,
+    storeData: string
+  ) => Promise<any>;
   db_getHex: (dbName: string, keyName: string) => Promise<any>;
   shh_version: () => Promise<any>;
   shh_hasIdentity: (address: string) => Promise<any>;
@@ -92,7 +120,6 @@ interface IProxiedRpcMethods {
   shh_uninstallFilter: (filterId: string) => Promise<any>;
   shh_getFilterChanges: (filterId: string) => Promise<any>;
   shh_getMessages: (filterId: string) => Promise<any>;
-
 }
 type ITopic = string | null | (string | null)[];
 
@@ -112,18 +139,15 @@ interface IMethodAndParams {
   params: String[] | String;
 }
 
-interface INode {
-  sendRawTx(tx: string): Promise<string>;
-  ethCall(tx: string): Promise<string>;
-}
-
 interface IRequest {
   method: String;
   params: any | any[];
   id: String;
   jsonrpc: String;
 }
+
 type IBlockNumber = string | 'earliest' | 'latest' | 'pending';
+
 interface IRPCRequestObj {
   txObj: IRequest;
   postprocessor: any;

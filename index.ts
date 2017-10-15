@@ -7,8 +7,30 @@ async function init() {
   const infura = 'https://mainnet.infura.io/kC4pdeo022QLvBPpwskg';
   const local = 'http://localhost:8545';
   const node = ProxiedNode(local);
-  const connectedErc20 = ConnectedContract(erc20, node, {
-    to: '0x0abdace70d3790235af448c88547603b945604ea'
+  node.setEndpoint(local);
+  const accounts = await node.eth_accounts();
+  const x = await node.eth_getBalance(accounts[0]);
+  await node.eth_sendTransaction({
+    to: accounts[0],
+    from: accounts[1],
+    value: '10000000'
   });
+  await node.eth_sendTransaction({
+    to: accounts[0],
+    from: accounts[1],
+    value: '10000000'
+  });
+  const txHash = await node.eth_sendTransaction({
+    to: accounts[0],
+    from: accounts[1],
+    value: '10000000'
+  });
+  console.log('\n\n\n');
+  console.log(txHash);
+  let k = await node.eth_getTransactionReceipt(txHash);
+  let m = await node.eth_getBlockByHash(k.blockHash, true);
+  console.log(k);
+  console.log('\n\n\n');
+  console.log(m);
 }
 init();

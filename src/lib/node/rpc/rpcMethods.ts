@@ -12,7 +12,7 @@ const eth_call = (call: ICallTxObj) => ({
 
 const eth_sendTransaction = (tx: ITransactionObj) => ({
   method: JsonRpcMethods.eth_sendTransaction,
-  params: [tx, 'pending']
+  params: [tx]
 });
 
 const eth_accounts = () => ({
@@ -38,47 +38,50 @@ const eth_estimateGas = (tx: IEstimateGasObj) => ({
 const eth_gasPrice = () => ({ method: eth_gasPrice });
 
 const eth_getBalance = (address: string) => ({
-  method: eth_getBalance,
+  method: JsonRpcMethods.eth_getBalance,
   params: [address, 'pending']
 });
 
 const eth_getBlockByHash = (hash: string, fullTxObj: boolean) => ({
-  method: eth_getBlockByHash,
+  method: JsonRpcMethods.eth_getBlockByHash,
   params: [hash, fullTxObj]
 });
 
 const eth_getBlockByNumber = (
   blocknumber: IBlockNumber,
   fullTxObj: boolean
-) => ({ method: eth_getBlockByNumber, params: [blocknumber, fullTxObj] });
+) => ({
+  method: JsonRpcMethods.eth_getBlockByNumber,
+  params: [blocknumber, fullTxObj]
+});
 
 const eth_getBlockTransactionCountByHash = (hash: string) => ({
-  method: eth_getBlockTransactionCountByHash,
+  method: JsonRpcMethods.eth_getBlockTransactionCountByHash,
   params: [hash]
 });
 
 const eth_getBlockTransactionCountByNumber = (blocknumber: IBlockNumber) => ({
-  method: eth_getBlockTransactionCountByNumber,
+  method: JsonRpcMethods.eth_getBlockTransactionCountByNumber,
   params: [blocknumber]
 });
 
 const eth_getCode = (address: string) => ({
-  method: eth_getCode,
+  method: JsonRpcMethods.eth_getCode,
   params: ['pending']
 });
 
 const eth_getFilterChanges = (filterId: string) => ({
-  method: eth_getFilterChanges,
+  method: JsonRpcMethods.eth_getFilterChanges,
   params: [filterId]
 });
 
 const eth_getFilterLogs = (filterId: string) => ({
-  method: eth_getFilterLogs,
+  method: JsonRpcMethods.eth_getFilterLogs,
   params: [filterId]
 });
 
 const eth_getLogs = (filterObj: IFilterOptions) => ({
-  method: eth_getLogs,
+  method: JsonRpcMethods.eth_getLogs,
   params: [filterObj]
 });
 
@@ -87,7 +90,7 @@ const eth_getStorageAt = (
   positionInStorage: string,
   blockNumber: IBlockNumber
 ) => ({
-  method: eth_getStorageAt,
+  method: JsonRpcMethods.eth_getStorageAt,
   params: [address, positionInStorage, blockNumber]
 });
 
@@ -95,7 +98,7 @@ const eth_getTransactionByBlockHashAndIndex = (
   hash: string,
   transactionIdx: string
 ) => ({
-  method: eth_getTransactionByBlockHashAndIndex,
+  method: JsonRpcMethods.eth_getTransactionByBlockHashAndIndex,
   params: [hash, transactionIdx]
 });
 
@@ -103,112 +106,122 @@ const eth_getTransactionByBlockNumberAndIndex = (
   blockNum: IBlockNumber,
   transactionIdx: string
 ) => ({
-  method: eth_getTransactionByBlockNumberAndIndex,
+  method: JsonRpcMethods.eth_getTransactionByBlockNumberAndIndex,
   params: [blockNum, transactionIdx]
 });
 
 const eth_getTransactionByHash = (hash: string) => ({
-  method: eth_getTransactionByHash,
+  method: JsonRpcMethods.eth_getTransactionByHash,
   params: [hash]
 });
 
 const eth_getTransactionCount = (address: string, blockNum?: IBlockNumber) => ({
-  method: eth_getTransactionCount,
+  method: JsonRpcMethods.eth_getTransactionCount,
   params: [address, blockNum]
 });
 
 const eth_getTransactionReceipt = (hash: string) => ({
-  method: eth_getTransactionReceipt,
+  method: JsonRpcMethods.eth_getTransactionReceipt,
   params: [hash]
 });
 
-const eth_getUncleByBlockHashAndIndex = (hash: string, transactionIdx: string) => ({
-  method: eth_getUncleByBlockHashAndIndex,
+const eth_getUncleByBlockHashAndIndex = (
+  hash: string,
+  transactionIdx: string
+) => ({
+  method: JsonRpcMethods.eth_getUncleByBlockHashAndIndex,
   params: [hash, eth_getTransactionCount]
 });
 
-const eth_getUncleByBlockNumberAndIndex = (blockNum?: IBlockNumber, transactionIdx: string) => ({
-  method: eth_getUncleByBlockNumberAndIndex,
+const eth_getUncleByBlockNumberAndIndex = (
+  transactionIdx: string,
+  blockNum?: IBlockNumber
+) => ({
+  method: JsonRpcMethods.eth_getUncleByBlockNumberAndIndex,
   params: [blockNum, transactionIdx]
 });
 
 const eth_getCompilers = () => ({
-  method: eth_getCompilers,
+  method: JsonRpcMethods.eth_getCompilers,
   params: []
 });
 
 const eth_compileSolidity = (source: string) => ({
-  method: eth_compileSolidity,
+  method: JsonRpcMethods.eth_compileSolidity,
   params: [source]
 });
 
 const eth_compileLLL = (source: string) => ({
-  method: eth_compileLLL,
+  method: JsonRpcMethods.eth_compileLLL,
   params: [source]
 });
 
 const eth_compileSerpent = (source: string) => ({
-  method: eth_compileSerpent,
+  method: JsonRpcMethods.eth_compileSerpent,
   params: [source]
 });
 
 const eth_newFilter = (filterObj: IFilterOptions) => ({
-  method: eth_newFilter,
+  method: JsonRpcMethods.eth_newFilter,
   params: [filterObj]
 });
 
 const eth_newBlockFilter = () => ({
-  method: eth_newBlockFilter,
+  method: JsonRpcMethods.eth_newBlockFilter,
   params: []
 });
 
 const eth_newPendingTransactionFilter = () => ({
-  method: eth_newPendingTransactionFilter,
+  method: JsonRpcMethods.eth_newPendingTransactionFilter,
   params: []
 });
 
 const eth_uninstallFilter = (filterId: string) => ({
-  method: eth_uninstallFilter,
+  method: JsonRpcMethods.eth_uninstallFilter,
   params: [filterId]
 });
 
 const eth_getWork = () => ({
-  method: eth_getWork,
+  method: JsonRpcMethods.eth_getWork,
   params: []
 });
 
-const eth_submitWork = (hashNonceFound: string, hashHeadersPow: string, hashMixDigest: string) => ({
-  method: eth_submitWork,
-  params: [hashNonceFound,hashHeadersPow,hashMixDigest]
+const eth_submitWork = (
+  hashNonceFound: string,
+  hashHeadersPow: string,
+  hashMixDigest: string
+) => ({
+  method: JsonRpcMethods.eth_submitWork,
+  params: [hashNonceFound, hashHeadersPow, hashMixDigest]
 });
 
 const eth_submitHashrate = (hashRate: string, id: string) => ({
-  method: eth_submitHashrate,
+  method: JsonRpcMethods.eth_submitHashrate,
   params: [hashRate, id]
 });
 
 const db_putString = (dbName: string, keyName: string, store: string) => ({
-  method: db_putString,
+  method: JsonRpcMethods.db_putString,
   params: [dbName, keyName, store]
 });
 
 const db_getString = (dbName: string, keyName: string) => ({
-  method: db_getString,
+  method: JsonRpcMethods.db_getString,
   params: [dbName, keyName]
 });
 
 const db_putHex = (dbName: string, keyName: string, storeData: string) => ({
-  method: db_putHex,
+  method: JsonRpcMethods.db_putHex,
   params: [dbName, keyName, storeData]
 });
 
 const db_getHex = (dbName: string, keyName: string) => ({
-  method: db_getHex,
+  method: JsonRpcMethods.db_getHex,
   params: [dbName, keyName]
 });
 
 const shh_version = () => ({
-  method: shh_version,
+  method: JsonRpcMethods.shh_version,
   params: []
 });
 
@@ -312,14 +325,14 @@ const rpcMethods = {
 
 export const rerouteRPCMethodsHandler = obj => {
   const rerouteRPC = {
-    get(node, propKey) {
+    get(node: IAugmentedNode, propKey) {
       const rpcMethod = rpcMethods[propKey];
       const nodeMethod = node[propKey];
       if (!rpcMethod && !nodeMethod) {
         throw Error(`${propKey} is not an RPC or Node method`);
       }
       if (nodeMethod) {
-        const result = (...args) => nodeMethod.apply(node, args);
+        const result = (...args) => nodeMethod(...args);
         return result;
       } else {
         return (...args) => {
@@ -329,7 +342,7 @@ export const rerouteRPCMethodsHandler = obj => {
             postprocessor: JSONPostParser(call.parser),
             errorHandler: JSONErrorHandler(call.errorHandler)
           };
-          return node.sendRPCRequest.call(node, rpcObj);
+          return node.sendRpcRequest(rpcObj);
         };
       }
     }
