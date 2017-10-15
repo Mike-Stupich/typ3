@@ -16,7 +16,7 @@ export const FunctionFactory = (
   const outputTypes = outputs.map(({ type }) => type);
   const inputNames = inputs.map(({ name }) => name);
   const outputNames: string[] = outputs.map(
-    ({ name }, i) => outputMappings[i] || name || `${i}`
+    ({ name }, i) => name || outputMappings[i] || `${i}`
   );
   const methodSelector = abi.methodID(name, inputTypes).toString('hex');
 
